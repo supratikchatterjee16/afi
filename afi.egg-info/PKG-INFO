@@ -1,0 +1,38 @@
+Metadata-Version: 1.1
+Name: afi
+Version: 0.0.2
+Summary: Automatic File Identifier
+Home-page: UNKNOWN
+Author: Supratik Chatterjee
+Author-email: supratikdevm96@gmail.com
+License: MIT
+Project-URL: Source, https://github.com/supratikchatterjee16/afi
+Project-URL: Issues, https://github.com/supratikchatterjee16/afi/issues
+Description: # Automatic File Identifier
+        
+        A simple program written to identify by hook(extensions) or by crook(signatures). Failing to either, implies that the file might be a text file with no signature or extension.
+        
+        ## Using
+        
+        There is a signature downloader, which is tailored to download and store information found on [File Signatures](https://filesignatures.net/). This creates a python file named signatures.py, which needs to be in the same folder as the program.
+        The program imports this and makes use of it.
+        
+        ## Author
+        
+        Supratik Chatterjee
+        
+        ## Issues
+        
+        There are some file popular extensions and signatures missing. Should one find it, kindly let me know.
+        
+        ## Downloading
+        
+        ```bash
+        pip install afi
+        ```
+        
+Keywords: extensions signatures filehandling file identification
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent

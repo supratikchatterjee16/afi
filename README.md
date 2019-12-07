@@ -18,5 +18,10 @@ There are some file popular extensions and signatures missing. Should one find i
 ## Downloading
 
 ```bash
-pip install afi
+mkdir afi
+cd ./afi
+git init
+git remote add origin https://github.com/supratikchatterjee16/afi.git
+git pull origin master
+pip install .
 ```
