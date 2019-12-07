@@ -96,14 +96,16 @@ def identify_mime(filepath):
 		return ['text/unidentified']
 
 def identify(i):
+	x = []
 	if os.path.isfile(i):
-		print(i, identify_mime(i))
+		x.append((i, identify_mime(i)))
 	elif os.path.isdir(i):
 		for f in os.listdir(i):
 			if i != './':
-				identify(i +'/'+ f)
+				x.extend(identify(i +'/'+ f))
 			else:
-				identify(i+f)
+				x.extend(identify(i+f))
+	return x
 
 def main():
 	arguments = sys.argv
@@ -112,7 +114,8 @@ def main():
 		if i=='-u' or i == '--update':
 			update.download_signatures()
 		elif os.path.exists(i):
-			identify(i)
+			for x in identify(i):
+				print(x)
 		else:
 			print('Argument not understood. Argument :',i)
 
