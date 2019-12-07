@@ -1,6 +1,12 @@
 # Automatic File Identifier
 
-A simple program written to identify by hook(extensions) or by crook(signatures). Failing to either, implies that the file might be a text file with no signature or extension.
+A simple program written to identify a file using the extension or using file signatures. 
+Failing to do either, implies that the file might be a text file with no signature or extension.
+
+It is not intended to be a final solution that finds everything about a file.
+i.e. the purpose is to provide mimes for popular identifiable formats.
+
+It is to be integrated with another project called Advanced Pattern Finder.
 
 ## Using
 
