@@ -14,3 +14,9 @@ Supratik Chatterjee
 ## Issues
 
 There are some file popular extensions and signatures missing. Should one find it, kindly let me know.
+
+## Downloading
+
+```bash
+pip install afi
+```
