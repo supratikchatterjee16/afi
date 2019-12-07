@@ -1,12 +1,13 @@
 # Script to download data from https://filesignatures.net
 # This is the fastest way known to me for getting a verbose list of file signatures
-from bs4 import BeautifulSoup as bs
-import requests
+import os
 import sys
 import csv
-import os
+import requests
+import datetime
+from bs4 import BeautifulSoup as bs
 
-def download_signatures(outpath):
+def download_signatures(outpath = sys.path[0] + 'setup.py'):
 	total = 0
 	count = 0
 	temp_file = 'temp.txt'
@@ -27,7 +28,7 @@ def download_signatures(outpath):
 		del rows[0]#Delete the useless empty td at the first
 		if len(rows)<30:
 			if count != 0:
-				print('reached end')
+				print('update complete')
 				break
 			count+=1
 		total += len(rows)
@@ -38,7 +39,7 @@ def download_signatures(outpath):
 					if data != '\n':
 						extfile.write(data+', ')
 				extfile.write('\n')
-	print('total rows counted ',total)
+	print('total signatures downloaded :',total)
 	string = ''
 	with open(temp_file, 'r') as csvfile:
 		reader = csv.reader(csvfile, delimiter=',');
@@ -51,9 +52,6 @@ def download_signatures(outpath):
 	with open(outpath, 'a') as writefile:
 		writefile.write('list = [\n')
 		writefile.write(string)
-		writefile.write(']')
+		writefile.write(']#'+str(datetime.datetime.now()))
 	os.remove(temp_file)
-try:
-	download_signatures('signatures.py')
-except:
-	print('Network error')
+	print('Output written to :',writefile)

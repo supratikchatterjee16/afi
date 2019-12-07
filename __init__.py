@@ -1,7 +1,12 @@
-import binascii
+import os
+import sys
 import math
-import mimetypes
-import signatures
+
+__all__ = ['mimetypes','signatures','download_signatures']
+
+import afi.mimetypes as mimetypes
+import afi.signatures as signatures
+import afi.download_signatures as update
 
 extensions_list = mimetypes.list
 signatures_list = signatures.list
@@ -65,6 +70,8 @@ def search_extensions(extension, lower_index = 0, upper_index = len(extensions_l
 
 def identify_mime(filepath):
 	extension = None
+	if os.path.isfile(filepath) != True:
+		return ['folder']
 	if filepath.rfind('.') != -1 :
 		extension = filepath[filepath.rfind('.') + 1:]
 	x = search_extensions('zip')
@@ -81,6 +88,33 @@ def identify_mime(filepath):
 			x = search_extensions(i)
 			if x != None:
 				list.extend(x)
-		return list
+		if len(list) > 0:
+			return list
+		else:
+			return ['unidentified','text/unidentified']
 	else:
-		return None
+		return ['text/unidentified']
+
+def identify(i):
+	if os.path.isfile(i):
+		print(i, identify_mime(i))
+	elif os.path.isdir(i):
+		for f in os.listdir(i):
+			if i != './':
+				identify(i +'/'+ f)
+			else:
+				identify(i+f)
+
+def main():
+	arguments = sys.argv
+	arguments = arguments[1:]
+	for i in arguments:
+		if i=='-u' or i == '--update':
+			update.download_signatures()
+		elif os.path.exists(i):
+			identify(i)
+		else:
+			print('Argument not understood. Argument :',i)
+
+if __name__ == '__main__':
+	main()
